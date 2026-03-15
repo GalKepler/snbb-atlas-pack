@@ -1,5 +1,10 @@
 # SNBB Atlas Pack
 
+[![Tests](https://github.com/GalKepler/snbb-atlas-pack/actions/workflows/tests.yml/badge.svg)](https://github.com/GalKepler/snbb-atlas-pack/actions/workflows/tests.yml)
+[![Docs](https://github.com/GalKepler/snbb-atlas-pack/actions/workflows/docs.yml/badge.svg)](https://github.com/GalKepler/snbb-atlas-pack/actions/workflows/docs.yml)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13%2B-blue)](https://www.python.org/downloads/)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 A BIDS-compatible parcellation atlas repository for the **Strauss Neuroplasticity Brain Bank (SNBB)**, providing atlases not shipped with [QSIRecon/PennLINC](https://github.com/PennLINC/AtlasPack). This dataset is managed with [DataLad](https://www.datalad.org/) and git-annex.
 
 ---

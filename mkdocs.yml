@@ -42,6 +42,7 @@ nav:
     - HCP-MMP (Surface): atlases/hcpmmp.md
     - Schaefer2018 + Tian (Combined): atlases/schaefer_tian.md
   - Usage: usage.md
+  - API Reference: api.md
   - Development: development.md
   - Publishing: publishing.md
 

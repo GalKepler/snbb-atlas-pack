@@ -71,7 +71,53 @@ After building, save outputs with DataLad rather than plain `git commit` so that
 datalad save -m "Rebuild all atlases"
 ```
 
-## Accessing Atlas Files
+## Python API
+
+After `uv sync`, the `snbb_atlas_pack` package is importable. It provides a
+high-level fetcher interface — no need to construct file paths manually.
+
+```python
+import snbb_atlas_pack as snbb
+
+# List all 46 available atlas IDs
+snbb.list_atlases()
+# ['HCPMMP', 'HCPex', 'Schaefer2018N1000n7Tian2020S1', ..., 'TianS4']
+
+# Fetch a volumetric atlas
+atlas = snbb.get_atlas("TianS1")
+atlas.maps       # Path → …/atlas-TianS1_space-MNI152NLin2009cAsym_res-01_dseg.nii.gz
+atlas.maps_R     # None (volumetric atlases have no right-hemisphere path)
+atlas.labels     # pd.DataFrame with columns: index, label, name, hemisphere, …
+atlas.space      # 'MNI152NLin2009cAsym'
+atlas.modality   # 'volumetric'
+
+# Fetch a surface atlas (both hemispheres)
+hcpmmp = snbb.get_atlas("HCPMMP")
+hcpmmp.maps      # Path → …_hemi-L_dseg.label.gii
+hcpmmp.maps_R    # Path → …_hemi-R_dseg.label.gii
+
+# Single hemisphere
+lh = snbb.get_atlas("HCPMMP", hemi="L")
+lh.maps_R        # None
+
+# Load the image with nibabel (maps is a Path, not a loaded object)
+import nibabel as nib
+img = nib.load(atlas.maps)
+data = img.get_fdata()   # numpy array
+
+# Get the prebuilt yabplot mesh directory
+mesh_dir = snbb.get_mesh("TianS1", component="subcortical")
+
+# Build meshes on demand (if derivatives/yabplot is not yet populated)
+snbb.build_meshes("TianS1")   # single atlas
+snbb.build_meshes()            # all atlases
+```
+
+See the [API Reference](api.md) for full parameter and return-type documentation.
+
+---
+
+## Accessing Atlas Files (direct paths)
 
 ### Python (nibabel)
 
