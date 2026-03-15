@@ -73,11 +73,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#publishing-to-datalad" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -287,7 +282,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../notebooks/01_getting_started.md" class="md-tabs__link">
+        <a href="../notebooks/01_getting_started/" class="md-tabs__link">
           
   
   Notebooks
@@ -643,11 +638,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../notebooks/01_getting_started.md" class="md-nav__link">
+      <a href="../notebooks/01_getting_started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Getting Started
+    Getting Started with
   </span>
   
 
@@ -664,11 +659,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../notebooks/02_visualization.md" class="md-nav__link">
+      <a href="../notebooks/02_visualization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Visualization
+    Atlas Visualization
   </span>
   
 
@@ -718,19 +713,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Publishing
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -741,70 +723,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-commit-current-state" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Commit Current State
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-create-a-github-sibling" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Create a GitHub Sibling
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-store-annexed-binary-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Store Annexed (Binary) Files
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-verify" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Verify
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#for-users-after-publishing" class="md-nav__link">
-    <span class="md-ellipsis">
-      For Users After Publishing
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -828,64 +746,9 @@
   
 
 
-<h1 id="publishing-to-datalad">Publishing to DataLad<a class="headerlink" href="#publishing-to-datalad" title="Permanent link">&para;</a></h1>
-<p>This dataset is already a DataLad dataset (see <code>.datalad/config</code>). The steps below make it publicly accessible so others can <code>datalad clone</code> and <code>datalad get</code> individual atlases.</p>
-<h2 id="1-commit-current-state">1. Commit Current State<a class="headerlink" href="#1-commit-current-state" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial atlas pack build&quot;</span>
-</code></pre></div>
-<h2 id="2-create-a-github-sibling">2. Create a GitHub Sibling<a class="headerlink" href="#2-create-a-github-sibling" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Requires a GitHub personal access token</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>datalad<span class="w"> </span>create-sibling-github<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span>--dataset<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span>--name<span class="w"> </span>github<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span>--github-organization<span class="w"> </span>&lt;your-org-or-username&gt;<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span>snbb-atlas-pack
-</code></pre></div>
-<h2 id="3-store-annexed-binary-files">3. Store Annexed (Binary) Files<a class="headerlink" href="#3-store-annexed-binary-files" title="Permanent link">&para;</a></h2>
-<p>NIfTI/GIFTI files are annexed — they are not stored in git. Choose one option:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">RIA Store (recommended for institutional storage)</label><label for="__tabbed_1_2">GitHub git-annex remote (smaller datasets)</label><label for="__tabbed_1_3">OSF (Open Science Framework)</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>datalad<span class="w"> </span>create-sibling-ria<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>--dataset<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>--name<span class="w"> </span>ria<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="s2">&quot;ria+ssh://hostname/path/to/ria-store&quot;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="w"> </span>ria<span class="w">      </span><span class="c1"># push annexed data</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="w"> </span>github<span class="w">   </span><span class="c1"># push metadata + scripts</span>
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>annex<span class="w"> </span>initremote<span class="w"> </span>github-annex<span class="w"> </span><span class="nv">type</span><span class="o">=</span>git<span class="w"> </span><span class="nv">url</span><span class="o">=</span>&lt;github-url&gt;
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="w"> </span>github
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>datalad-osf
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>datalad<span class="w"> </span>create-sibling-osf<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span>--dataset<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span>--name<span class="w"> </span>osf<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span>--title<span class="w"> </span><span class="s2">&quot;SNBB Atlas Pack&quot;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="w"> </span>osf
-</code></pre></div>
-</div>
-</div>
-</div>
-<h2 id="4-verify">4. Verify<a class="headerlink" href="#4-verify" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>datalad<span class="w"> </span>status<span class="w">          </span><span class="c1"># should be clean</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>-5<span class="w">    </span><span class="c1"># confirm commits</span>
-</code></pre></div>
-<h2 id="for-users-after-publishing">For Users After Publishing<a class="headerlink" href="#for-users-after-publishing" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Clone the dataset (metadata only, no large files)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>datalad<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;org&gt;/snbb-atlas-pack
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">cd</span><span class="w"> </span>snbb-atlas-pack
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># Download a specific atlas</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>datalad<span class="w"> </span>get<span class="w"> </span>atlases/atlas-TianS1/
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1"># Download all atlases (~several GB)</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>datalad<span class="w"> </span>get<span class="w"> </span>atlases/
-</code></pre></div>
+  <h1>Publishing</h1>
+
+<p>/annex/objects/MD5E-s1731--53049193a9e33df086c217034ccc25c6.md</p>
 
 
 
