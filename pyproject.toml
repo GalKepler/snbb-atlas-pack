@@ -3,9 +3,8 @@ name = "snbb-atlas-pack"
 version = "0.1.0"
 description = "BIDS-compatible atlas pack for the Strauss Neuroplasticity Brain Bank (SNBB)"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 dependencies = [
-    "ipykernel>=7.2.0",
     "jupyter>=1.1.1",
     "nibabel>=5.4.2",
     "nilearn>=0.13.1",
@@ -32,7 +31,7 @@ dev = [
 docs = [
     "mkdocs>=1.6.0,<2.0",
     "mkdocs-material>=9.5.0,<9.6.0",
-    "mkdocs-jupyter>=0.24",
+    "mkdocs-jupyter>=0.25.0",
 ]
 
 [tool.pytest.ini_options]
