@@ -102,6 +102,23 @@ atlases/atlas-Schaefer2018N{N}n7Tian2020S{S}/figures/
 
 **Subcortical figures are shared:** all `atlas-Schaefer2018N{N}n7Tian2020S{S}` variants reuse the precomputed Tian VTK meshes at `derivatives/yabplot/atlas-TianS{S}/`. The subcortical figures for all 10 N-values of a given S-scale are identical (they show the same Tian atlas boundaries).
 
+The examples below show the N=200 parcellation at each subcortical scale.
+
+=== "S1 — Cortical"
+    ![Schaefer200+TianS1 cortical](img/atlas-Schaefer2018N200n7Tian2020S1/figures/atlas-Schaefer2018N200n7Tian2020S1_cortical.png)
+
+=== "S1 — Subcortical"
+    ![Schaefer200+TianS1 subcortical](img/atlas-Schaefer2018N200n7Tian2020S1/figures/atlas-Schaefer2018N200n7Tian2020S1_subcortical.png)
+
+=== "S2 — Subcortical"
+    ![Schaefer200+TianS2 subcortical](img/atlas-Schaefer2018N200n7Tian2020S2/figures/atlas-Schaefer2018N200n7Tian2020S2_subcortical.png)
+
+=== "S3 — Subcortical"
+    ![Schaefer200+TianS3 subcortical](img/atlas-Schaefer2018N200n7Tian2020S3/figures/atlas-Schaefer2018N200n7Tian2020S3_subcortical.png)
+
+=== "S4 — Subcortical"
+    ![Schaefer200+TianS4 subcortical](img/atlas-Schaefer2018N200n7Tian2020S4/figures/atlas-Schaefer2018N200n7Tian2020S4_subcortical.png)
+
 ## Source Data
 
 ### Schaefer2018 (auto-downloaded)

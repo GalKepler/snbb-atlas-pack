@@ -72,6 +72,12 @@ atlases/atlas-HCPex/figures/
 
 Cached derivatives at `derivatives/yabplot/atlas-HCPex/`: cortical surface mesh (`.csv` + wb label file) and `subcortical/` VTK meshes.
 
+=== "Cortical (360 regions)"
+    ![HCPex cortical](img/atlas-HCPex/figures/atlas-HCPex_cortical.png)
+
+=== "Subcortical (66 regions)"
+    ![HCPex subcortical](img/atlas-HCPex/figures/atlas-HCPex_subcortical.png)
+
 ## Source Data
 
 Source files live in `sourcedata/HCPex/`:

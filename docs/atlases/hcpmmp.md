@@ -59,6 +59,8 @@ atlases/atlas-HCPMMP/figures/atlas-HCPMMP_cortical.png
 
 Cached derivatives at `derivatives/yabplot/atlas-HCPMMP/`: `HCPMMP.csv` (combined 64,984-vertex array) and `HCPMMP.txt` (label + RGB LUT). These are built from the GIFTI files and do not require re-running the full atlas build.
 
+![HCPMMP cortical](img/atlas-HCPMMP/figures/atlas-HCPMMP_cortical.png)
+
 ## Source Data
 
 The surface atlas is extracted from a CIFTI file distributed with the Tian 2020 MSA:

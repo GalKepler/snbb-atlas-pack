@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="SNBB Atlas Pack" width="200">
+</p>
+
 # SNBB Atlas Pack
 
 A **BIDS-compatible** brain parcellation atlas repository for the **Strauss Neuroplasticity Brain Bank (SNBB)**, providing atlases not shipped with [QSIRecon/PennLINC AtlasPack](https://github.com/PennLINC/AtlasPack). The dataset is managed with [DataLad](https://www.datalad.org/) and git-annex for reproducible, version-controlled distribution of large binary files.

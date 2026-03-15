@@ -28,6 +28,8 @@ theme:
     - content.code.copy
     - search.suggest
     - search.highlight
+  logo: assets/logo.png
+  favicon: assets/logo.png
   icon:
     repo: fontawesome/brands/github
 

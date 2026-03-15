@@ -95,6 +95,18 @@ atlases/atlas-TianS{N}/figures/atlas-TianS{N}_subcortical.png
 
 Intermediate VTK meshes are cached at `derivatives/yabplot/atlas-TianS{N}/` and reused by all Schaefer+TianS{N} combined atlases.
 
+=== "S1 (16 regions)"
+    ![TianS1 subcortical](img/atlas-TianS1/figures/atlas-TianS1_subcortical.png)
+
+=== "S2 (32 regions)"
+    ![TianS2 subcortical](img/atlas-TianS2/figures/atlas-TianS2_subcortical.png)
+
+=== "S3 (50 regions)"
+    ![TianS3 subcortical](img/atlas-TianS3/figures/atlas-TianS3_subcortical.png)
+
+=== "S4 (54 regions)"
+    ![TianS4 subcortical](img/atlas-TianS4/figures/atlas-TianS4_subcortical.png)
+
 ## Source Data
 
 Source files are read from an external path (not version-controlled in this repo):
