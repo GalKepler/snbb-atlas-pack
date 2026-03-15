@@ -554,6 +554,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recommended-uses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Uses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#scales" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -611,6 +622,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figures
+      
+    </span>
+  </a>
   
 </li>
       
@@ -853,8 +875,19 @@
 <p>Tian Y, Margulies DS, Breakspear M, Zalesky A. (2020). <em>Topographic organization of the human subcortex unveiled with functional connectivity gradients.</em> <strong>Nature Neuroscience</strong>, 23, 1421–1432. <a href="https://doi.org/10.1038/s41593-020-00711-6">doi:10.1038/s41593-020-00711-6</a></p>
 </blockquote>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>The Melbourne Subcortex Atlas (MSA) provides four hierarchical scales of subcortical parcellation derived from resting-state fMRI functional connectivity gradients. Each scale subdivides the same eight bilateral subcortical structures at increasing granularity.</p>
+<p>The Melbourne Subcortex Atlas (MSA) provides four hierarchical scales of subcortical parcellation derived from resting-state fMRI functional connectivity gradients in 3T HCP-style data. Each scale subdivides the same eight bilateral subcortical structures at increasing granularity, from 8 coarse bilateral regions (S1) up to 27 distinct bilateral structures (S4). Functional boundaries are defined by connectivity gradient discontinuities rather than anatomical landmarks, making this atlas particularly well-suited for fMRI and tractography analyses.</p>
 <p>All four atlases are in <strong>MNI152NLin2009cAsym</strong> space at <strong>1 mm isotropic</strong> resolution (3T acquisition).</p>
+<h2 id="recommended-uses">Recommended Uses<a class="headerlink" href="#recommended-uses" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Subcortical tractography endpoint definition</strong> — use S1 for coarse seeding/termination masks; S3/S4 for nucleus-specific tractography (e.g. thalamic nuclei).</li>
+<li><strong>Resting-state functional connectivity</strong> — subcortical nodes in whole-brain connectivity matrices; pairs with any cortical atlas (Schaefer+Tian combined atlases are pre-built in this pack).</li>
+<li><strong>Multi-scale analysis</strong> — run the same pipeline at S1 through S4 to assess sensitivity of results to subcortical granularity.</li>
+<li><strong>Scale selection guidance</strong> — S1 is appropriate when degrees of freedom are limited or the subcortex is not the focus; S2 provides anterior/posterior subdivisions; S3 and S4 add hippocampal and thalamic subdivisions validated against known cytoarchitectural boundaries.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Not in QSIRecon</p>
+<p>The standalone Tian atlases are not distributed by QSIRecon/PennLINC AtlasPack (the 4S series uses a different subcortical parcellation). Use these when you specifically need Melbourne Subcortex Atlas boundaries.</p>
+</div>
 <h2 id="scales">Scales<a class="headerlink" href="#scales" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -995,12 +1028,17 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>9      HIP-lh   HIP-lh   L           HIP        -26.0   -22.0   -14.0
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>...
 </code></pre></div>
+<h2 id="figures">Figures<a class="headerlink" href="#figures" title="Permanent link">&para;</a></h2>
+<p>Generate figures with <code>uv run python scripts/visualize_atlases.py</code>. Output location:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>atlases/atlas-TianS{N}/figures/atlas-TianS{N}_subcortical.png
+</code></pre></div>
+<p>Intermediate VTK meshes are cached at <code>derivatives/yabplot/atlas-TianS{N}/</code> and reused by all Schaefer+TianS{N} combined atlases.</p>
 <h2 id="source-data">Source Data<a class="headerlink" href="#source-data" title="Permanent link">&para;</a></h2>
 <p>Source files are read from an external path (not version-controlled in this repo):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/media/storage/yalab-dev/Tian2020MSA_v1.4/Tian2020MSA/3T/Subcortex-Only/
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>├── Tian_Subcortex_S{N}_3T_2009cAsym_1mm.nii.gz   # NIfTI image
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>├── Tian_Subcortex_S{N}_3T_label.txt               # One label per line
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>└── Tian_Subcortex_S{N}_3T_COG.txt                 # Tab-separated x/y/z coordinates
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/media/storage/yalab-dev/Tian2020MSA_v1.4/Tian2020MSA/3T/Subcortex-Only/
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── Tian_Subcortex_S{N}_3T_2009cAsym_1mm.nii.gz   # NIfTI image
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├── Tian_Subcortex_S{N}_3T_label.txt               # One label per line
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>└── Tian_Subcortex_S{N}_3T_COG.txt                 # Tab-separated x/y/z coordinates
 </code></pre></div>
 <h2 id="build-logic">Build Logic<a class="headerlink" href="#build-logic" title="Permanent link">&para;</a></h2>
 <p><code>scripts/atlas_tian.py</code> performs the following for each scale N ∈ {1, 2, 3, 4}:</p>
@@ -1011,17 +1049,17 @@
 <li>Copies the NIfTI to <code>atlases/atlas-TianS{N}/</code></li>
 <li>Writes the merged TSV</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># scripts/atlas_tian.py — simplified</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span> <span class="n">scale</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">labels_df</span> <span class="o">=</span> <span class="n">_parse_labels</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>   <span class="c1"># reads label + COG files</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src_nii</span><span class="p">,</span> <span class="n">dst_nii</span><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">utils</span><span class="o">.</span><span class="n">write_tsv</span><span class="p">(</span><span class="n">labels_df</span><span class="p">,</span> <span class="n">dst_tsv</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># scripts/atlas_tian.py — simplified</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">for</span> <span class="n">scale</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">labels_df</span> <span class="o">=</span> <span class="n">_parse_labels</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>   <span class="c1"># reads label + COG files</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src_nii</span><span class="p">,</span> <span class="n">dst_nii</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">utils</span><span class="o">.</span><span class="n">write_tsv</span><span class="p">(</span><span class="n">labels_df</span><span class="p">,</span> <span class="n">dst_tsv</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="region-counts-by-scale">Region Counts by Scale<a class="headerlink" href="#region-counts-by-scale" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>S1: 8 structures × 2 hemispheres = 16 regions
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>S2: ~32 regions  (anterior/posterior splits)
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>S3: ~50 regions  (hippocampal/thalamic subdivisions added)
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>S4: ~54 regions  (finest subdivision)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>S1: 8 structures × 2 hemispheres = 16 regions
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>S2: ~32 regions  (anterior/posterior splits)
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>S3: ~50 regions  (hippocampal/thalamic subdivisions added)
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>S4: ~54 regions  (finest subdivision)
 </code></pre></div>
 
 

@@ -659,10 +659,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#fetching-pre-built-atlases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Fetching Pre-built Atlases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites-for-building" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites (for building)
       
     </span>
   </a>
@@ -741,6 +752,95 @@
     <span class="md-ellipsis">
       
         Connectome Workbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-atlas-visualizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generating Atlas Visualizations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generating Atlas Visualizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#output-files-per-atlas-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output files per atlas family
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cached-derivatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cached derivatives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-prebuilt-yabplot-meshes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Prebuilt yabplot Meshes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Prebuilt yabplot Meshes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subcortical-plot-tian-hcpex-subcortex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subcortical plot (Tian, HCPex subcortex)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cortical-plot-hcpex-hcpmmp-schaefertian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cortical plot (HCPex, HCPMMP, Schaefer+Tian)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schaefertian-subcortical-reuse-tian-meshes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schaefer+Tian subcortical — reuse Tian meshes
       
     </span>
   </a>
@@ -857,7 +957,27 @@
 
 
 <h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h1>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="fetching-pre-built-atlases">Fetching Pre-built Atlases<a class="headerlink" href="#fetching-pre-built-atlases" title="Permanent link">&para;</a></h2>
+<p>The atlas files (NIfTI and GIFTI) are tracked by git-annex and can be fetched without running a build or installing Python dependencies.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Clone the dataset (metadata only — no large files yet)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>datalad<span class="w"> </span>clone<span class="w"> </span>https://github.com/GalKepler/snbb-atlas-pack
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>snbb-atlas-pack
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Fetch a single atlas</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>datalad<span class="w"> </span>get<span class="w"> </span>atlases/atlas-TianS1/
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Fetch all Tian scales</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>datalad<span class="w"> </span>get<span class="w"> </span>atlases/atlas-TianS*/
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Fetch all Schaefer+TianS1 variants</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>datalad<span class="w"> </span>get<span class="w"> </span>atlases/atlas-Schaefer2018N*Tian2020S1/
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1"># Fetch everything (large — check disk space first)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>datalad<span class="w"> </span>get<span class="w"> </span>atlases/
+</code></pre></div>
+<p>After fetching, atlas files are available as regular files at their BIDS paths. The TSV lookup tables are plain text tracked in git and are always present after cloning (no <code>datalad get</code> needed).</p>
+<hr />
+<h2 id="prerequisites-for-building">Prerequisites (for building)<a class="headerlink" href="#prerequisites-for-building" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Python 3.13+</li>
 <li><a href="https://docs.astral.sh/uv/">uv</a> (fast Python package manager)</li>
@@ -865,15 +985,15 @@
 <li>Access to the Tian MSA source files at <code>/media/storage/yalab-dev/Tian2020MSA_v1.4/</code> (local path)</li>
 </ul>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Clone the DataLad dataset</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>datalad<span class="w"> </span>clone<span class="w"> </span>https://github.com/GalKepler/snbb-atlas-pack
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>snbb-atlas-pack
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Install Python dependencies</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>uv<span class="w"> </span>sync
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Clone the DataLad dataset</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>datalad<span class="w"> </span>clone<span class="w"> </span>https://github.com/GalKepler/snbb-atlas-pack
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">cd</span><span class="w"> </span>snbb-atlas-pack
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Install Python dependencies</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>uv<span class="w"> </span>sync
 </code></pre></div>
 <h2 id="building-all-atlases">Building All Atlases<a class="headerlink" href="#building-all-atlases" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>main.py
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>main.py
 </code></pre></div>
 <p>This runs the full build pipeline:</p>
 <ol>
@@ -890,31 +1010,135 @@
 </div>
 <h2 id="saving-with-datalad">Saving with DataLad<a class="headerlink" href="#saving-with-datalad" title="Permanent link">&para;</a></h2>
 <p>After building, save outputs with DataLad rather than plain <code>git commit</code> so that NIfTI/GIFTI files are properly annexed:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Rebuild all atlases&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Rebuild all atlases&quot;</span>
 </code></pre></div>
 <h2 id="accessing-atlas-files">Accessing Atlas Files<a class="headerlink" href="#accessing-atlas-files" title="Permanent link">&para;</a></h2>
 <h3 id="python-nibabel">Python (nibabel)<a class="headerlink" href="#python-nibabel" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Load a volumetric atlas</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;atlases/atlas-TianS1/atlas-TianS1_space-MNI152NLin2009cAsym_res-01_dseg.nii.gz&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>  <span class="c1"># shape: (182, 218, 182)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Load the region lookup table</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">tsv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;atlases/atlas-TianS1/atlas-TianS1_dseg.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">tsv</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Load a volumetric atlas</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;atlases/atlas-TianS1/atlas-TianS1_space-MNI152NLin2009cAsym_res-01_dseg.nii.gz&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>  <span class="c1"># shape: (182, 218, 182)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># Load the region lookup table</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">tsv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;atlases/atlas-TianS1/atlas-TianS1_dseg.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">tsv</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </code></pre></div>
 <h3 id="python-nibabel-surface-atlas">Python (nibabel — surface atlas)<a class="headerlink" href="#python-nibabel-surface-atlas" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Load left hemisphere GIFTI</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">gifti</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;atlases/atlas-HCPMMP/atlas-HCPMMP_space-fsLR_hemi-L_dseg.label.gii&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">labels</span> <span class="o">=</span> <span class="n">gifti</span><span class="o">.</span><span class="n">darrays</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># shape: (32492,) — one label per vertex</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Load left hemisphere GIFTI</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">gifti</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;atlases/atlas-HCPMMP/atlas-HCPMMP_space-fsLR_hemi-L_dseg.label.gii&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">labels</span> <span class="o">=</span> <span class="n">gifti</span><span class="o">.</span><span class="n">darrays</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># shape: (32492,) — one label per vertex</span>
 </code></pre></div>
 <h3 id="connectome-workbench">Connectome Workbench<a class="headerlink" href="#connectome-workbench" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>wb_view<span class="w"> </span>atlases/atlas-HCPMMP/atlas-HCPMMP_space-fsLR_hemi-L_dseg.label.gii
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>wb_view<span class="w"> </span>atlases/atlas-HCPMMP/atlas-HCPMMP_space-fsLR_hemi-L_dseg.label.gii
 </code></pre></div>
+<h2 id="generating-atlas-visualizations">Generating Atlas Visualizations<a class="headerlink" href="#generating-atlas-visualizations" title="Permanent link">&para;</a></h2>
+<p>Atlas figures are generated by <code>scripts/visualize_atlases.py</code> using <a href="https://github.com/GalKepler/yabplot">yabplot</a>. Figures are saved to <code>atlases/&lt;atlas-name&gt;/figures/</code> and intermediate mesh/vertex data is cached in <code>derivatives/yabplot/</code> for fast re-plotting.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/visualize_atlases.py
+</code></pre></div>
+<p>The script is <strong>idempotent</strong> — it skips mesh building if the cache already exists. Running it a second time only re-renders the PNGs.</p>
+<h3 id="output-files-per-atlas-family">Output files per atlas family<a class="headerlink" href="#output-files-per-atlas-family" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Atlas family</th>
+<th><code>figures/</code> output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>atlas-TianS{N}</code></td>
+<td><code>atlas-TianS{N}_subcortical.png</code></td>
+</tr>
+<tr>
+<td><code>atlas-HCPex</code></td>
+<td><code>atlas-HCPex_cortical.png</code>, <code>atlas-HCPex_subcortical.png</code></td>
+</tr>
+<tr>
+<td><code>atlas-HCPMMP</code></td>
+<td><code>atlas-HCPMMP_cortical.png</code></td>
+</tr>
+<tr>
+<td><code>atlas-Schaefer2018N{N}n7Tian2020S{S}</code></td>
+<td><code>…_cortical.png</code>, <code>…_subcortical.png</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="cached-derivatives">Cached derivatives<a class="headerlink" href="#cached-derivatives" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>derivatives/yabplot/atlas-TianS{N}/</code></td>
+<td>VTK subcortical meshes (reused by all Schaefer+TianS{N})</td>
+</tr>
+<tr>
+<td><code>derivatives/yabplot/atlas-HCPex/</code></td>
+<td>Cortical surface CSV + wb label file; <code>subcortical/</code> VTK meshes</td>
+</tr>
+<tr>
+<td><code>derivatives/yabplot/atlas-HCPMMP/</code></td>
+<td><code>HCPMMP.csv</code> vertex array, <code>HCPMMP.txt</code> LUT</td>
+</tr>
+<tr>
+<td><code>derivatives/yabplot/atlas-Schaefer2018N{N}n7/</code></td>
+<td>Cortical surface CSV + wb label file</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="using-prebuilt-yabplot-meshes">Using Prebuilt yabplot Meshes<a class="headerlink" href="#using-prebuilt-yabplot-meshes" title="Permanent link">&para;</a></h2>
+<p>Once <code>derivatives/yabplot/</code> is populated, you can create custom visualizations — with your own per-region data overlaid — without rebuilding meshes. This is the recommended workflow for downstream analysis scripts.</p>
+<h3 id="subcortical-plot-tian-hcpex-subcortex">Subcortical plot (Tian, HCPex subcortex)<a class="headerlink" href="#subcortical-plot-tian-hcpex-subcortex" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">yabplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yab</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Load region metadata to know index ordering</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">tsv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;atlases/atlas-TianS1/atlas-TianS1_dseg.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># Your per-region values (e.g. FA, CBF, connectivity strength)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># Must have length == number of regions; order matches TSV index column</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tsv</span><span class="p">))</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">yab</span><span class="o">.</span><span class="n">plot_subcortical</span><span class="p">(</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    <span class="n">custom_atlas_path</span><span class="o">=</span><span class="s2">&quot;derivatives/yabplot/atlas-TianS1&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="n">export_path</span><span class="o">=</span><span class="s2">&quot;my_subcortical_figure.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>    <span class="n">display_type</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="cortical-plot-hcpex-hcpmmp-schaefertian">Cortical plot (HCPex, HCPMMP, Schaefer+Tian)<a class="headerlink" href="#cortical-plot-hcpex-hcpmmp-schaefertian" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">yabplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yab</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">yab</span><span class="o">.</span><span class="n">plot_cortical</span><span class="p">(</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>                                  <span class="c1"># None = plain parcellation colours</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">custom_atlas_path</span><span class="o">=</span><span class="s2">&quot;derivatives/yabplot/atlas-HCPex&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">export_path</span><span class="o">=</span><span class="s2">&quot;my_cortical_figure.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">display_type</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">800</span><span class="p">),</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="schaefertian-subcortical-reuse-tian-meshes">Schaefer+Tian subcortical — reuse Tian meshes<a class="headerlink" href="#schaefertian-subcortical-reuse-tian-meshes" title="Permanent link">&para;</a></h3>
+<p>All 40 Schaefer+Tian combinations share subcortical meshes with the corresponding Tian atlas. There is <strong>no need to rebuild</strong> subcortical meshes per Schaefer resolution:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># S=2 subcortical mesh works for any Schaefer+TianS2 variant</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">yab</span><span class="o">.</span><span class="n">plot_subcortical</span><span class="p">(</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">custom_atlas_path</span><span class="o">=</span><span class="s2">&quot;derivatives/yabplot/atlas-TianS2&quot;</span><span class="p">,</span>   <span class="c1"># shared mesh</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">export_path</span><span class="o">=</span><span class="s2">&quot;schaefer400_tians2_subcortical.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">display_type</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">)</span>
+</code></pre></div>
+<hr />
 <h2 id="getting-qsirecon-pennlinc-atlases">Getting QSIRecon / PennLINC Atlases<a class="headerlink" href="#getting-qsirecon-pennlinc-atlases" title="Permanent link">&para;</a></h2>
 <p>The following atlases are already distributed by <a href="https://github.com/PennLINC/AtlasPack">QSIRecon's AtlasPack</a> and are <strong>not</strong> included here to avoid duplication:</p>
 <table>
@@ -952,19 +1176,19 @@
 </tbody>
 </table>
 <p><strong>Option 1 — DataLad clone (recommended):</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>datalad<span class="w"> </span>clone<span class="w"> </span>https://github.com/PennLINC/AtlasPack
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span><span class="w"> </span>AtlasPack
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>datalad<span class="w"> </span>get<span class="w"> </span>atlas-4S456Parcels/<span class="w">   </span><span class="c1"># download a specific atlas</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>datalad<span class="w"> </span>clone<span class="w"> </span>https://github.com/PennLINC/AtlasPack
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">cd</span><span class="w"> </span>AtlasPack
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>datalad<span class="w"> </span>get<span class="w"> </span>atlas-4S456Parcels/<span class="w">   </span><span class="c1"># download a specific atlas</span>
 </code></pre></div></p>
 <p><strong>Option 2 — TemplateFlow Python client:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">templateflow.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tflow</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">files</span> <span class="o">=</span> <span class="n">tflow</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MNI152NLin2009cAsym&quot;</span><span class="p">,</span> <span class="n">atlas</span><span class="o">=</span><span class="s2">&quot;Schaefer2018&quot;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">templateflow.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tflow</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">files</span> <span class="o">=</span> <span class="n">tflow</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MNI152NLin2009cAsym&quot;</span><span class="p">,</span> <span class="n">atlas</span><span class="o">=</span><span class="s2">&quot;Schaefer2018&quot;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></p>
 <p><strong>Option 3 — Pre-bundled in QSIRecon containers:</strong>
 Atlases are available at <code>/opt/templateflow/</code> inside QSIRecon Docker/Singularity images.</p>
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
 <p>Managed with <a href="https://docs.astral.sh/uv/">uv</a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uv<span class="w"> </span>sync
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>uv<span class="w"> </span>sync
 </code></pre></div>
 <table>
 <thead>

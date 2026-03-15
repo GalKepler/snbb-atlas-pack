@@ -537,6 +537,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#atlas-selection-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atlas Selection Guide
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#summary-table" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -867,6 +878,42 @@
 </tbody>
 </table>
 <p>Atlas-specific columns (coordinates, lobe, network, color) are documented on each atlas page.</p>
+<h2 id="atlas-selection-guide">Atlas Selection Guide<a class="headerlink" href="#atlas-selection-guide" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Use case</th>
+<th>Recommended atlas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Subcortical-only analysis (tractography, fMRI)</td>
+<td><code>atlas-TianS1</code> (coarse) or <code>atlas-TianS3</code> (fine)</td>
+</tr>
+<tr>
+<td>Whole-brain volumetric connectivity matrix</td>
+<td><code>atlas-Schaefer2018N200n7Tian2020S1</code> (flexible resolution) or <code>atlas-HCPex</code> (HCP-MMP boundaries)</td>
+</tr>
+<tr>
+<td>Surface-based cortical analysis (Workbench, HCP pipelines)</td>
+<td><code>atlas-HCPMMP</code></td>
+</tr>
+<tr>
+<td>Comparing with HCP-MMP cortical literature (volumetric)</td>
+<td><code>atlas-HCPex</code></td>
+</tr>
+<tr>
+<td>Multi-scale or literature-matched cortical parcellation</td>
+<td><code>atlas-Schaefer2018N{N}n7Tian2020S{S}</code> (choose N to match prior work)</td>
+</tr>
+<tr>
+<td>Fine-grained hippocampal / thalamic subdivision</td>
+<td><code>atlas-TianS3</code> or <code>atlas-TianS4</code> (standalone or combined with Schaefer)</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2 id="summary-table">Summary Table<a class="headerlink" href="#summary-table" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

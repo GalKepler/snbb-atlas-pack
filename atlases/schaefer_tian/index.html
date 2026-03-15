@@ -638,6 +638,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recommended-uses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Uses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#atlas-matrix" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -695,6 +706,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figures
+      
+    </span>
+  </a>
   
 </li>
       
@@ -921,8 +943,23 @@
 <p>Tian Y, Margulies DS, Breakspear M, Zalesky A. (2020). <em>Topographic organization of the human subcortex unveiled with functional connectivity gradients.</em> <strong>Nature Neuroscience</strong>, 23, 1421–1432. <a href="https://doi.org/10.1038/s41593-020-00711-6">doi:10.1038/s41593-020-00711-6</a></p>
 </blockquote>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>These 40 atlases combine the <strong>Schaefer 2018 7-network cortical parcellation</strong> with the <strong>Tian Melbourne Subcortex Atlas</strong> at multiple scales, yielding complete cortex+subcortex volumetric atlases at varying resolutions.</p>
-<p>They are built by merging a Schaefer cortical NIfTI (background = 0, cortical indices 1–N) with a Tian subcortical NIfTI (shifted so subcortical indices start at N+1), then concatenating their label tables.</p>
+<p>These 40 atlases combine the <strong>Schaefer 2018 7-network cortical parcellation</strong> with the <strong>Tian Melbourne Subcortex Atlas</strong> at multiple scales, yielding complete cortex+subcortex volumetric atlases at varying resolutions. They are built by merging a Schaefer cortical NIfTI (background = 0, cortical indices 1–N) with a Tian subcortical NIfTI (shifted so subcortical indices start at N+1), then concatenating their label tables.</p>
+<h2 id="recommended-uses">Recommended Uses<a class="headerlink" href="#recommended-uses" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Whole-brain connectivity matrices at tunable resolution</strong> — Schaefer 2018 is one of the most frequently cited cortical parcellations in recent fMRI literature; results are directly comparable with a large body of published work.</li>
+<li><strong>Multi-scale analyses</strong> — the 10 × 4 = 40 combinations let you systematically assess how findings vary with cortical and subcortical granularity.</li>
+<li><strong>Default choice for new SNBB analyses</strong> — N=200–400 + S1 balances resolution against statistical reliability for most fMRI sample sizes. Use S2 or S3 when subcortical subdivision is relevant.</li>
+<li><strong>7-network labeling</strong> — the <code>network</code> column (Vis, SomMot, DorsAttn, SalVentAttn, Limbic, Cont, Default) enables network-level aggregation directly from the TSV without additional lookups.</li>
+<li><strong>Compatibility with QSIRecon outputs</strong> — QSIRecon uses Schaefer+CIT168/HCP thalamus (4S series); these atlases use the same Schaefer cortex with Tian subcortex as a complementary option.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Which N and S to pick</p>
+<ul>
+<li>N=200, S=1 is a good starting point: 216 total regions, well-powered for most SNBB sample sizes.</li>
+<li>Increase N for higher cortical resolution or when comparing with specific literature values.</li>
+<li>Use S=2 when you need anterior/posterior distinctions (e.g. anterior vs. posterior thalamus); S=3/S4 for hippocampal or fine thalamic subdivision.</li>
+</ul>
+</div>
 <h2 id="atlas-matrix">Atlas Matrix<a class="headerlink" href="#atlas-matrix" title="Permanent link">&para;</a></h2>
 <p>10 cortical granularities × 4 subcortical scales = <strong>40 atlases</strong>:</p>
 <table>
@@ -1079,6 +1116,13 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>...
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>116    CAU-lh       CAU-lh                L           subcortex CAU-lh
 </code></pre></div>
+<h2 id="figures">Figures<a class="headerlink" href="#figures" title="Permanent link">&para;</a></h2>
+<p>Generate figures with <code>uv run python scripts/visualize_atlases.py</code>. Output location:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>atlases/atlas-Schaefer2018N{N}n7Tian2020S{S}/figures/
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── atlas-Schaefer2018N{N}n7Tian2020S{S}_cortical.png
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>└── atlas-Schaefer2018N{N}n7Tian2020S{S}_subcortical.png
+</code></pre></div>
+<p><strong>Subcortical figures are shared:</strong> all <code>atlas-Schaefer2018N{N}n7Tian2020S{S}</code> variants reuse the precomputed Tian VTK meshes at <code>derivatives/yabplot/atlas-TianS{S}/</code>. The subcortical figures for all 10 N-values of a given S-scale are identical (they show the same Tian atlas boundaries).</p>
 <h2 id="source-data">Source Data<a class="headerlink" href="#source-data" title="Permanent link">&para;</a></h2>
 <h3 id="schaefer2018-auto-downloaded">Schaefer2018 (auto-downloaded)<a class="headerlink" href="#schaefer2018-auto-downloaded" title="Permanent link">&para;</a></h3>
 <p>Files are auto-downloaded to <code>sourcedata/Schaefer2018/</code> on first build:</p>
@@ -1103,45 +1147,45 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sourcedata/Schaefer2018/
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── Schaefer2018_100Parcels_7Networks_MNI152NLin2009cAsym_1mm.nii.gz
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├── Schaefer2018_100Parcels_7Networks_order.txt
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>├── Schaefer2018_200Parcels_7Networks_MNI152NLin2009cAsym_1mm.nii.gz
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>├── ...
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>└── Schaefer2018_1000Parcels_7Networks_order.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sourcedata/Schaefer2018/
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>├── Schaefer2018_100Parcels_7Networks_MNI152NLin2009cAsym_1mm.nii.gz
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>├── Schaefer2018_100Parcels_7Networks_order.txt
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>├── Schaefer2018_200Parcels_7Networks_MNI152NLin2009cAsym_1mm.nii.gz
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>├── ...
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>└── Schaefer2018_1000Parcels_7Networks_order.txt
 </code></pre></div>
 <p><strong>LUT format</strong> (<code>Schaefer2018_{N}Parcels_7Networks_order.txt</code>):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>1    7Networks_LH_Vis_1     120  18  131  0
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>2    7Networks_LH_Vis_2     120  18  132  0
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>1    7Networks_LH_Vis_1     120  18  131  0
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>2    7Networks_LH_Vis_2     120  18  132  0
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>...
 </code></pre></div></p>
 <h3 id="tian-msa-external-path">Tian MSA (external path)<a class="headerlink" href="#tian-msa-external-path" title="Permanent link">&para;</a></h3>
 <p>Read directly from:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>/media/storage/yalab-dev/Tian2020MSA_v1.4/Tian2020MSA/3T/Subcortex-Only/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>/media/storage/yalab-dev/Tian2020MSA_v1.4/Tian2020MSA/3T/Subcortex-Only/
 </code></pre></div></p>
 <h2 id="build-logic">Build Logic<a class="headerlink" href="#build-logic" title="Permanent link">&para;</a></h2>
 <p><code>scripts/atlas_schaefer_tian.py</code> performs the following for each (N, scale) pair:</p>
 <h3 id="1-auto-download-if-needed">1. Auto-download (if needed)<a class="headerlink" href="#1-auto-download-if-needed" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">download_sourcedata</span><span class="p">()</span>  <span class="c1"># idempotent; skips if files exist</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">download_sourcedata</span><span class="p">()</span>  <span class="c1"># idempotent; skips if files exist</span>
 </code></pre></div>
 <h3 id="2-combine-niftis">2. Combine NIfTIs<a class="headerlink" href="#2-combine-niftis" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">_combine_niftis</span><span class="p">(</span><span class="n">cortex_path</span><span class="p">,</span> <span class="n">subcortex_path</span><span class="p">,</span> <span class="n">n_parcels</span><span class="p">,</span> <span class="n">out_path</span><span class="p">):</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">cortex_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cortex_path</span><span class="p">)</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">subcortex_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">subcortex_path</span><span class="p">)</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="c1"># Resample subcortex to cortex affine/shape if they differ (order=0)</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">subcortex_resampled</span> <span class="o">=</span> <span class="n">resample_to_img</span><span class="p">(</span><span class="n">subcortex_img</span><span class="p">,</span> <span class="n">cortex_img</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="c1"># Merge: cortex keeps indices 1..N; subcortex shifted to N+1..N+M</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">combined</span> <span class="o">=</span> <span class="n">cortex_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="n">mask</span> <span class="o">=</span> <span class="n">subcortex_data</span> <span class="o">&gt;</span> <span class="mi">0</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">combined</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">subcortex_data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">+</span> <span class="n">n_parcels</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">combined</span><span class="p">,</span> <span class="n">cortex_img</span><span class="o">.</span><span class="n">affine</span><span class="p">),</span> <span class="n">out_path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">_combine_niftis</span><span class="p">(</span><span class="n">cortex_path</span><span class="p">,</span> <span class="n">subcortex_path</span><span class="p">,</span> <span class="n">n_parcels</span><span class="p">,</span> <span class="n">out_path</span><span class="p">):</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">cortex_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cortex_path</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">subcortex_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">subcortex_path</span><span class="p">)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="c1"># Resample subcortex to cortex affine/shape if they differ (order=0)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">subcortex_resampled</span> <span class="o">=</span> <span class="n">resample_to_img</span><span class="p">(</span><span class="n">subcortex_img</span><span class="p">,</span> <span class="n">cortex_img</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="c1"># Merge: cortex keeps indices 1..N; subcortex shifted to N+1..N+M</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">combined</span> <span class="o">=</span> <span class="n">cortex_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">mask</span> <span class="o">=</span> <span class="n">subcortex_data</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="n">combined</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">subcortex_data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">+</span> <span class="n">n_parcels</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">combined</span><span class="p">,</span> <span class="n">cortex_img</span><span class="o">.</span><span class="n">affine</span><span class="p">),</span> <span class="n">out_path</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="3-concatenate-label-tables">3. Concatenate label tables<a class="headerlink" href="#3-concatenate-label-tables" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">schaefer_df</span> <span class="o">=</span> <span class="n">_load_schaefer_labels</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>    <span class="c1"># indices 1..N</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">tian_df</span> <span class="o">=</span> <span class="n">_load_tian_labels</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>         <span class="c1"># indices 1..M → shifted to N+1..N+M</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">tian_df</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">n</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">combined_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">schaefer_df</span><span class="p">,</span> <span class="n">tian_df</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">utils</span><span class="o">.</span><span class="n">write_tsv</span><span class="p">(</span><span class="n">combined_df</span><span class="p">,</span> <span class="n">tsv_path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">schaefer_df</span> <span class="o">=</span> <span class="n">_load_schaefer_labels</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>    <span class="c1"># indices 1..N</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">tian_df</span> <span class="o">=</span> <span class="n">_load_tian_labels</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>         <span class="c1"># indices 1..M → shifted to N+1..N+M</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">tian_df</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">n</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">combined_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">schaefer_df</span><span class="p">,</span> <span class="n">tian_df</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">utils</span><span class="o">.</span><span class="n">write_tsv</span><span class="p">(</span><span class="n">combined_df</span><span class="p">,</span> <span class="n">tsv_path</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="schaefer-7-network-labels">Schaefer 7-Network Labels<a class="headerlink" href="#schaefer-7-network-labels" title="Permanent link">&para;</a></h2>
 <p>The 7 cortical networks in the Yeo 2011 scheme used by Schaefer 2018:</p>

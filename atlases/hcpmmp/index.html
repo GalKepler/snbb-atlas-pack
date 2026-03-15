@@ -610,6 +610,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recommended-uses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Uses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#files" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -625,6 +636,17 @@
     <span class="md-ellipsis">
       
         TSV Schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figures
       
     </span>
   </a>
@@ -853,8 +875,19 @@
 <p>Glasser MF, Coalson TS, Robinson EC, et al. (2016). <em>A multi-modal parcellation of human cerebral cortex.</em> <strong>Nature</strong>, 536, 171–178. <a href="https://doi.org/10.1038/nature18933">doi:10.1038/nature18933</a></p>
 </blockquote>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>The HCP Multimodal Parcellation 1.0 (HCP-MMP) is a 360-region <strong>cortical surface</strong> atlas derived from multimodal MRI data (myelin maps, cortical thickness, fMRI, and more) from 210 HCP subjects. It covers all of cortex at 180 regions per hemisphere.</p>
+<p>The HCP Multimodal Parcellation 1.0 (HCP-MMP) is a 360-region <strong>cortical surface</strong> atlas derived from multimodal MRI data (myelin maps, cortical thickness, fMRI, and more) from 210 HCP subjects. It covers all of cortex at 180 regions per hemisphere. Boundaries were determined by abrupt changes across multiple MRI modalities simultaneously, making the parcellation more biologically grounded than purely functional or purely structural atlases.</p>
 <p>In the SNBB Atlas Pack, this atlas is provided as per-hemisphere <strong>GIFTI label files</strong> in <strong>fsLR 32k</strong> space (32,492 vertices per hemisphere), extracted from the Tian 2020 MSA CIFTI file.</p>
+<h2 id="recommended-uses">Recommended Uses<a class="headerlink" href="#recommended-uses" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Surface-based cortical analysis</strong> — the native format of this atlas; compatible with Connectome Workbench, HCP pipelines, nilearn surface plotting, and fMRIPrep/XCP-D outputs in fsLR space.</li>
+<li><strong>Cortical morphology and thickness</strong> — surface-based analysis of cortical thickness, surface area, or myelin maps parcellated at the HCP-MMP level.</li>
+<li><strong>High-resolution cortical parcellation</strong> — 180 areas per hemisphere is finer than Schaefer 100–400 solutions; use when the question demands fine-grained cortical distinctions.</li>
+<li><strong>Cross-study comparison</strong> — HCP-MMP is one of the most widely used cortical atlases; results are directly comparable with a large body of HCP-derived literature.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Cortex only, surface space</p>
+<p>This atlas covers cortex only (no subcortex) and is in fsLR 32k surface space. For volumetric or whole-brain analyses, use <code>atlas-HCPex</code> (volumetric cortex + subcortex) or an <code>atlas-Schaefer2018N{N}n7Tian2020S{S}</code> variant.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -939,20 +972,25 @@
 </tr>
 </tbody>
 </table>
+<h2 id="figures">Figures<a class="headerlink" href="#figures" title="Permanent link">&para;</a></h2>
+<p>Generate figures with <code>uv run python scripts/visualize_atlases.py</code>. Output location:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>atlases/atlas-HCPMMP/figures/atlas-HCPMMP_cortical.png
+</code></pre></div>
+<p>Cached derivatives at <code>derivatives/yabplot/atlas-HCPMMP/</code>: <code>HCPMMP.csv</code> (combined 64,984-vertex array) and <code>HCPMMP.txt</code> (label + RGB LUT). These are built from the GIFTI files and do not require re-running the full atlas build.</p>
 <h2 id="source-data">Source Data<a class="headerlink" href="#source-data" title="Permanent link">&para;</a></h2>
 <p>The surface atlas is extracted from a CIFTI file distributed with the Tian 2020 MSA:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/media/storage/yalab-dev/Tian2020MSA_v1.4/Tian2020MSA/3T/Cortex-Subcortex/
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>└── Q1-Q6_RelatedValidation210.CorticalAreas_dil_Final_Final_Areas_Group_Colors
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    .32k_fs_LR_Tian_Subcortex_S1.dlabel.nii
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/media/storage/yalab-dev/Tian2020MSA_v1.4/Tian2020MSA/3T/Cortex-Subcortex/
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>└── Q1-Q6_RelatedValidation210.CorticalAreas_dil_Final_Final_Areas_Group_Colors
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    .32k_fs_LR_Tian_Subcortex_S1.dlabel.nii
 </code></pre></div>
 <p>Region metadata comes from <code>sourcedata/HCPex/mmp_labels.csv</code> (same file used by the HCPex module).</p>
 <h2 id="build-logic">Build Logic<a class="headerlink" href="#build-logic" title="Permanent link">&para;</a></h2>
 <p><code>scripts/atlas_hcpmmp.py</code> extracts the HCP-MMP cortical surface parcellation from the CIFTI file in three steps:</p>
 <h3 id="1-cifti-name-normalization">1. CIFTI Name Normalization<a class="headerlink" href="#1-cifti-name-normalization" title="Permanent link">&para;</a></h3>
 <p>CIFTI label names use a different convention than HCP-MMP standard names:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>CIFTI name → MMP name
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&quot;L_V1_ROI&quot;  → &quot;V1_L&quot;
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&quot;R_PFm_ROI&quot; → &quot;PFm_R&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>CIFTI name → MMP name
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&quot;L_V1_ROI&quot;  → &quot;V1_L&quot;
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>&quot;R_PFm_ROI&quot; → &quot;PFm_R&quot;
 </code></pre></div>
 <p>The function <code>_cifti_label_to_mmp_name()</code> strips the leading hemisphere prefix and trailing <code>_ROI</code> suffix, then appends the hemisphere code.</p>
 <h3 id="2-per-hemisphere-gifti-extraction">2. Per-Hemisphere GIFTI Extraction<a class="headerlink" href="#2-per-hemisphere-gifti-extraction" title="Permanent link">&para;</a></h3>
@@ -967,16 +1005,16 @@
 </ol>
 <h3 id="3-tsv-generation">3. TSV Generation<a class="headerlink" href="#3-tsv-generation" title="Permanent link">&para;</a></h3>
 <p>The unified TSV is built from <code>mmp_labels.csv</code>, selecting and renaming relevant columns. Both hemispheres share a single lookup table indexed 1–360.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># scripts/atlas_hcpmmp.py — simplified</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">cifti</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">CIFTI_FILE</span><span class="p">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">mmp_df</span> <span class="o">=</span> <span class="n">_load_mmp_colors</span><span class="p">()</span>   <span class="c1"># mmp_labels.csv + RGB from HCPex LUT</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">for</span> <span class="n">hemi</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">]:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">gifti_img</span> <span class="o">=</span> <span class="n">_extract_gifti</span><span class="p">(</span><span class="n">cifti</span><span class="p">,</span> <span class="n">hemi</span><span class="p">,</span> <span class="n">mmp_df</span><span class="p">)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">gifti_img</span><span class="p">,</span> <span class="n">out_path</span><span class="p">)</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">tsv</span> <span class="o">=</span> <span class="n">_build_tsv</span><span class="p">(</span><span class="n">mmp_df</span><span class="p">)</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">utils</span><span class="o">.</span><span class="n">write_tsv</span><span class="p">(</span><span class="n">tsv</span><span class="p">,</span> <span class="n">tsv_path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># scripts/atlas_hcpmmp.py — simplified</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">cifti</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">CIFTI_FILE</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">mmp_df</span> <span class="o">=</span> <span class="n">_load_mmp_colors</span><span class="p">()</span>   <span class="c1"># mmp_labels.csv + RGB from HCPex LUT</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">for</span> <span class="n">hemi</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">]:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">gifti_img</span> <span class="o">=</span> <span class="n">_extract_gifti</span><span class="p">(</span><span class="n">cifti</span><span class="p">,</span> <span class="n">hemi</span><span class="p">,</span> <span class="n">mmp_df</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">gifti_img</span><span class="p">,</span> <span class="n">out_path</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">tsv</span> <span class="o">=</span> <span class="n">_build_tsv</span><span class="p">(</span><span class="n">mmp_df</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">utils</span><span class="o">.</span><span class="n">write_tsv</span><span class="p">(</span><span class="n">tsv</span><span class="p">,</span> <span class="n">tsv_path</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="usage-notes">Usage Notes<a class="headerlink" href="#usage-notes" title="Permanent link">&para;</a></h2>
 <ul>
