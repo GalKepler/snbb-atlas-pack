@@ -104,36 +104,6 @@ atlases/atlas-Schaefer2018N{N}n7Tian2020S{S}/figures/
 
 The cortical figures below show all 10 parcel counts at Tian S1 (subcortical boundaries are identical across N — see the [Tian atlas page](tian.md) for subcortical scale comparisons).
 
-=== "N=100"
-    ![Schaefer100+TianS1 cortical](img/atlas-Schaefer2018N100n7Tian2020S1/figures/atlas-Schaefer2018N100n7Tian2020S1_cortical.png)
-
-=== "N=200"
-    ![Schaefer200+TianS1 cortical](img/atlas-Schaefer2018N200n7Tian2020S1/figures/atlas-Schaefer2018N200n7Tian2020S1_cortical.png)
-
-=== "N=300"
-    ![Schaefer300+TianS1 cortical](img/atlas-Schaefer2018N300n7Tian2020S1/figures/atlas-Schaefer2018N300n7Tian2020S1_cortical.png)
-
-=== "N=400"
-    ![Schaefer400+TianS1 cortical](img/atlas-Schaefer2018N400n7Tian2020S1/figures/atlas-Schaefer2018N400n7Tian2020S1_cortical.png)
-
-=== "N=500"
-    ![Schaefer500+TianS1 cortical](img/atlas-Schaefer2018N500n7Tian2020S1/figures/atlas-Schaefer2018N500n7Tian2020S1_cortical.png)
-
-=== "N=600"
-    ![Schaefer600+TianS1 cortical](img/atlas-Schaefer2018N600n7Tian2020S1/figures/atlas-Schaefer2018N600n7Tian2020S1_cortical.png)
-
-=== "N=700"
-    ![Schaefer700+TianS1 cortical](img/atlas-Schaefer2018N700n7Tian2020S1/figures/atlas-Schaefer2018N700n7Tian2020S1_cortical.png)
-
-=== "N=800"
-    ![Schaefer800+TianS1 cortical](img/atlas-Schaefer2018N800n7Tian2020S1/figures/atlas-Schaefer2018N800n7Tian2020S1_cortical.png)
-
-=== "N=900"
-    ![Schaefer900+TianS1 cortical](img/atlas-Schaefer2018N900n7Tian2020S1/figures/atlas-Schaefer2018N900n7Tian2020S1_cortical.png)
-
-=== "N=1000"
-    ![Schaefer1000+TianS1 cortical](img/atlas-Schaefer2018N1000n7Tian2020S1/figures/atlas-Schaefer2018N1000n7Tian2020S1_cortical.png)
-
 ## Source Data
 
 ### Schaefer2018 (auto-downloaded)
