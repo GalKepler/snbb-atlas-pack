@@ -17,6 +17,7 @@ DATASET_DESCRIPTION = {
         "Glasser et al. 2016 - Nature - https://doi.org/10.1038/nature18933",
         "Huang et al. 2022 - NeuroImage - HCPex (https://doi.org/10.1016/j.neuroimage.2022.119385)",
         "Schaefer et al. 2018 - Cereb Cortex - https://doi.org/10.1093/cercor/bhx179",
+        "Fan et al. 2016 - Cereb Cortex - Brainnetome Atlas (https://doi.org/10.1093/cercor/bhw157)",
     ],
     "GeneratedBy": [
         {
@@ -30,7 +31,7 @@ DATASET_DESCRIPTION = {
 
 
 def build() -> None:
-    from scripts import atlas_hcpex, atlas_hcpmmp, atlas_schaefer_tian, atlas_tian
+    from scripts import atlas_brainnetome, atlas_hcpex, atlas_hcpmmp, atlas_schaefer_tian, atlas_tian
 
     print("Building SNBB Atlas Pack...")
 
@@ -43,5 +44,6 @@ def build() -> None:
     atlas_hcpex.build(BASE)
     atlas_hcpmmp.build(BASE)
     atlas_schaefer_tian.build(BASE)
+    atlas_brainnetome.build(BASE)
 
     print("Done.")

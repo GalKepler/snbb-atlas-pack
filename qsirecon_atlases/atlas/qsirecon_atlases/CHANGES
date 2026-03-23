@@ -1,0 +1,3 @@
+1.0.0 2024/10/17
+  - Reorganize QSIRecon atlases into a dataset compliant with current draft of BEP038.
+  - Remove Schaefer atlases. QSIRecon will use the 4S atlases from AtlasPack instead.

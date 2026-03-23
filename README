@@ -1,0 +1,7 @@
+# SNBB Atlas Pack
+
+A BIDS-compatible parcellation atlas repository for the Strauss Neuroplasticity Brain Bank (SNBB), providing atlases not shipped with QSIRecon/PennLINC.
+
+Atlases included: TianS1–S4 (Melbourne Subcortex), HCPex, HCPMMP, Schaefer-Tian.
+
+See https://github.com/GalKepler/snbb-atlas-pack for details.

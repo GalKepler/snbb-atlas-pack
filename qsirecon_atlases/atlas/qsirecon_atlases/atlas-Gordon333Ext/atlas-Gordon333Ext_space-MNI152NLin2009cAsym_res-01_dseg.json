@@ -1,0 +1,18 @@
+{
+    "BIDSVersion": "1.9.0",
+    "Description": "The 333-node Gordon cortical atlas extended with subcortical parcels.",
+    "Name": "Gordon333Ext",
+    "ReferencesAndLinks": [
+        "https://doi.org/10.1093/cercor/bhu239"
+    ],
+    "Resolution": {
+        "01": {
+            "zooms": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
+    },
+    "SpatialReference": "https://templateflow.s3.amazonaws.com/tpl-MNI152NLin2009cAsym_res-01_T1w.nii.gz"
+}

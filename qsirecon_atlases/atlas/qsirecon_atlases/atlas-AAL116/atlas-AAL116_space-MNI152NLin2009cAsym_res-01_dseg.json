@@ -1,0 +1,15 @@
+{
+    "BIDSVersion": "1.9.0",
+    "Description": "The 116-node AAL atlas.",
+    "Name": "AAL116",
+    "Resolution": {
+        "01": {
+            "zooms": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
+    },
+    "SpatialReference": "https://templateflow.s3.amazonaws.com/tpl-MNI152NLin2009cAsym_res-01_T1w.nii.gz"
+}
