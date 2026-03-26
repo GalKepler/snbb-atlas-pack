@@ -4,10 +4,12 @@ Generates all 40 combinations: N={100,200,...,1000} × Tian scales S1–S4.
 
 Sources:
   - Schaefer cortex NIfTIs: TemplateFlow S3 (MNI152NLin2009cAsym res-01)
+  - Schaefer cortex GIFTIs: TemplateFlow (fsaverage 164k, 7Networks)
   - Schaefer labels: CBIG freeview_lut (7Networks order)
   - Tian subcortex: /media/storage/yalab-dev/Tian2020MSA_v1.4/
 """
 
+import shutil
 import urllib.request
 from pathlib import Path
 
@@ -15,7 +17,7 @@ import nibabel as nib
 import numpy as np
 import pandas as pd
 
-from scripts.utils import ensure_atlas_dir, write_tsv
+from scripts.utils import ensure_atlas_dir, safe_copy, write_tsv
 
 TIAN_SRC = Path("/media/storage/yalab-dev/Tian2020MSA_v1.4/Tian2020MSA/3T/Subcortex-Only")
 SOURCEDATA = Path(__file__).parent.parent / "sourcedata" / "Schaefer2018"
@@ -137,12 +139,39 @@ def _combine_niftis(cortex_path: Path, subcortex_path: Path, n_parcels: int, out
     )
 
 
+def _get_surface_gifti(n: int, hemi: str) -> Path:
+    """Return TemplateFlow-cached path for the fsaverage 164k Schaefer GIFTI.
+
+    Filters all fsaverage Schaefer label.gii files for 7-network and the
+    requested parcel count and hemisphere.
+    """
+    import templateflow.api as tflow
+
+    files = tflow.get("fsaverage", atlas="Schaefer2018", suffix="dseg", extension=".label.gii")
+    if not isinstance(files, list):
+        files = [files] if files else []
+
+    # Pattern unique to 7-network, correct scale and hemisphere (164k only available density)
+    target = f"hemi-{hemi}_den-164k_atlas-Schaefer2018_seg-7n_scale-{n}_"
+    matches = [Path(f) for f in files if target in str(f)]
+
+    if not matches:
+        raise FileNotFoundError(
+            f"No fsaverage 164k Schaefer {n}-parcel 7-network GIFTI found for hemi-{hemi}. "
+            "Run: templateflow.api.get('fsaverage', atlas='Schaefer2018', suffix='dseg')"
+        )
+    return matches[0]
+
+
 def build(base: Path) -> None:
     download_sourcedata()
 
     for n in PARCELS:
         schaefer_df = _load_schaefer_labels(n)
         cortex_nii = _nii_path(n)
+
+        # Fetch surface GIFTIs once per parcel count (shared across all Tian scales)
+        surface_giis = {hemi: _get_surface_gifti(n, hemi) for hemi in ("L", "R")}
 
         for scale in SCALES:
             atlas_name = f"Schaefer2018N{n}n7Tian2020S{scale}"
@@ -160,4 +189,12 @@ def build(base: Path) -> None:
                 .reset_index(drop=True)
             )
             write_tsv(df, out_dir / f"atlas-{atlas_name}_dseg.tsv")
+
+            # Copy cortex-only surface GIFTIs (indices 1..N match volumetric cortex labels)
+            for hemi, src_gii in surface_giis.items():
+                dst_gii = out_dir / (
+                    f"atlas-{atlas_name}_space-fsaverage_den-164k_hemi-{hemi}_dseg.label.gii"
+                )
+                safe_copy(src_gii, dst_gii)
+
             print(f"  [Schaefer2018N{n}n7TianS{scale}] {len(df)} regions → {out_dir.name}/")

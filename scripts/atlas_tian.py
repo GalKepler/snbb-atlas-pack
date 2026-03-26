@@ -1,11 +1,10 @@
 """Build Tian Melbourne Subcortex Atlas (3T, Scales S1–S4) BIDS outputs."""
 
-import shutil
 from pathlib import Path
 
 import pandas as pd
 
-from scripts.utils import ensure_atlas_dir, write_tsv
+from scripts.utils import ensure_atlas_dir, safe_copy, write_tsv
 
 TIAN_SRC = Path("/media/storage/yalab-dev/Tian2020MSA_v1.4/Tian2020MSA/3T/Subcortex-Only")
 SCALES = [1, 2, 3, 4]
@@ -47,7 +46,7 @@ def build(base: Path) -> None:
         # Copy NIfTI
         src_nii = TIAN_SRC / f"Tian_Subcortex_S{scale}_3T_2009cAsym_1mm.nii.gz"
         dst_nii = out_dir / f"atlas-{atlas_name}_space-MNI152NLin2009cAsym_res-01_dseg.nii.gz"
-        shutil.copy2(src_nii, dst_nii)
+        safe_copy(src_nii, dst_nii)
 
         # Write TSV
         df = _parse_labels(scale)

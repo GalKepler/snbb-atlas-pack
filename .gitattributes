@@ -6,3 +6,4 @@
 atlases/** annex.largefiles=anything
 derivatives/** annex.largefiles=anything
 sourcedata/** annex.largefiles=anything
+qsirecon_ext/** annex.largefiles=anything

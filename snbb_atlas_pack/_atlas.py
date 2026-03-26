@@ -26,17 +26,24 @@ class AtlasResult:
 def get_atlas(
     atlas_id: str,
     hemi: Literal["L", "R"] | None = None,
+    modality: Literal["volumetric", "surface"] | None = None,
 ) -> AtlasResult:
     """Fetch atlas image path(s) and labels DataFrame.
 
     Parameters
     ----------
     atlas_id:
-        Atlas identifier, e.g. ``'TianS1'``, ``'HCPMMP'``.
+        Atlas identifier, e.g. ``'TianS1'``, ``'HCPMMP'``,
+        ``'Schaefer2018N100n7Tian2020S1'``.
     hemi:
         For surface atlases, return only this hemisphere (``'L'`` or ``'R'``).
         ``None`` (default) returns both hemispheres (``maps`` = LH, ``maps_R`` = RH).
-        Must be ``None`` for volumetric atlases.
+        Must be ``None`` when the effective modality is volumetric.
+    modality:
+        ``'volumetric'`` or ``'surface'``. Only relevant for atlases that have
+        both modalities (e.g. Schaefer+Tian, Brainnetome246Ext). When ``None``,
+        volumetric is returned for atlases with both modalities; purely surface
+        atlases (HCPMMP) always return surface.
 
     Returns
     -------
@@ -51,35 +58,93 @@ def get_atlas(
     meta: AtlasMeta = _REGISTRY[atlas_id]
     atlas_dir = BASE_DIR / "atlases" / meta.dir_name
 
-    if meta.modality == "volumetric":
-        if hemi is not None:
+    # Determine effective modality
+    if modality is not None:
+        if modality not in ("volumetric", "surface"):
+            raise ValueError(f"modality must be 'volumetric' or 'surface', got {modality!r}.")
+        if modality == "surface" and meta.surface_space is None:
             raise ValueError(
-                f"Atlas {atlas_id!r} is volumetric; 'hemi' must be None, got {hemi!r}."
+                f"Atlas {atlas_id!r} has no surface version (surface_space is None)."
             )
-        img_path = atlas_dir / f"{meta.dir_name}_space-{meta.space}_res-01_dseg.nii.gz"
-        maps = img_path
-        maps_R = None
+        if modality == "volumetric" and meta.modality == "surface":
+            raise ValueError(
+                f"Atlas {atlas_id!r} is surface-only; cannot request volumetric modality."
+            )
+        effective = modality
     else:
-        if hemi is None:
-            maps = atlas_dir / f"{meta.dir_name}_space-{meta.space}_hemi-L_dseg.label.gii"
-            maps_R = atlas_dir / f"{meta.dir_name}_space-{meta.space}_hemi-R_dseg.label.gii"
-        elif hemi == "L":
-            maps = atlas_dir / f"{meta.dir_name}_space-{meta.space}_hemi-L_dseg.label.gii"
-            maps_R = None
-        elif hemi == "R":
-            maps = atlas_dir / f"{meta.dir_name}_space-{meta.space}_hemi-R_dseg.label.gii"
-            maps_R = None
+        # Default: volumetric when available, else surface
+        if meta.modality == "surface":
+            effective = "surface"
         else:
-            raise ValueError(f"hemi must be 'L', 'R', or None, got {hemi!r}.")
+            effective = "volumetric"
 
     tsv_path = atlas_dir / f"{meta.dir_name}_dseg.tsv"
+
+    if effective == "volumetric":
+        if hemi is not None:
+            raise ValueError(
+                f"Atlas {atlas_id!r} is being returned as volumetric; "
+                f"'hemi' must be None for volumetric maps, got {hemi!r}. "
+                f"Pass modality='surface' to request surface files."
+            )
+        img_path = atlas_dir / f"{meta.dir_name}_space-{meta.space}_res-01_dseg.nii.gz"
+        return AtlasResult(
+            atlas_id=atlas_id,
+            maps=img_path,
+            maps_R=None,
+            space=meta.space,
+            modality="volumetric",
+            _tsv_path=tsv_path,
+        )
+
+    # Surface path — build filename based on surface format
+    surf_space = meta.surface_space
+
+    if meta.surface_format == "cifti":
+        # CIFTI is a single bilateral file; hemi does not apply
+        if hemi is not None:
+            raise ValueError(
+                f"Atlas {atlas_id!r} uses CIFTI surface format; "
+                f"'hemi' must be None, got {hemi!r}."
+            )
+        den_part = f"_den-{meta.surface_den}" if meta.surface_den else ""
+        cifti_fname = f"{meta.dir_name}_space-{surf_space}{den_part}_dseg.dlabel.nii"
+        return AtlasResult(
+            atlas_id=atlas_id,
+            maps=atlas_dir / cifti_fname,
+            maps_R=None,
+            space=surf_space,
+            modality="surface",
+            _tsv_path=tsv_path,
+        )
+
+    # Per-hemisphere surface path (GIFTI or .annot) — optional den entity
+    _ext = "_dseg.annot" if meta.surface_format == "annot" else "_dseg.label.gii"
+    if meta.surface_den:
+        def _surf_fname(h: str) -> str:
+            return f"{meta.dir_name}_space-{surf_space}_den-{meta.surface_den}_hemi-{h}{_ext}"
+    else:
+        def _surf_fname(h: str) -> str:
+            return f"{meta.dir_name}_space-{surf_space}_hemi-{h}{_ext}"
+
+    if hemi is None:
+        maps = atlas_dir / _surf_fname("L")
+        maps_R = atlas_dir / _surf_fname("R")
+    elif hemi == "L":
+        maps = atlas_dir / _surf_fname("L")
+        maps_R = None
+    elif hemi == "R":
+        maps = atlas_dir / _surf_fname("R")
+        maps_R = None
+    else:
+        raise ValueError(f"hemi must be 'L', 'R', or None, got {hemi!r}.")
 
     return AtlasResult(
         atlas_id=atlas_id,
         maps=maps,
         maps_R=maps_R,
-        space=meta.space,
-        modality=meta.modality,
+        space=surf_space,
+        modality="surface",
         _tsv_path=tsv_path,
     )
 

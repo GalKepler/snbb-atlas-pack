@@ -12,7 +12,7 @@ import nibabel as nib
 import numpy as np
 import pandas as pd
 
-from scripts.utils import ensure_atlas_dir, write_tsv
+from scripts.utils import ensure_atlas_dir, safe_copy, write_tsv
 
 SOURCEDATA = (
     Path(__file__).parent.parent
@@ -123,7 +123,7 @@ def build(base: Path) -> None:
 
     # Copy the FreeSurfer GCA classifier for subcortical segmentation.
     dst_gca = out_dir / f"atlas-{ATLAS_NAME}_subcortex.gca"
-    shutil.copy2(GCA_FILE, dst_gca)
+    safe_copy(GCA_FILE, dst_gca)
 
     n_ctx = (tsv_df["structure"] == "cortex").sum()
     n_sub = (tsv_df["structure"] == "subcortex").sum()

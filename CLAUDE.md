@@ -4,12 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Purpose
 
-A BIDS-compatible atlas pack for a brain bank (SNBB), providing atlases not covered by Pennlinc/QSIRecon. The repo is a [DataLad](https://www.datalad.org/) dataset (git-annex tracks large binary files).
+A BIDS-compatible atlas pack for a brain bank (SNBB), providing both atlases not covered by Pennlinc/QSIRecon and those that are. The repo is a [DataLad](https://www.datalad.org/) dataset (git-annex tracks large binary files).
 
 **Atlases included:**
 - `atlas-TianS1` through `atlas-TianS4` — Melbourne Subcortex Atlas (3T, MNI152NLin2009cAsym, 1mm)
 - `atlas-HCPex` — Extended HCP multimodal parcellation (MNI152NLin2009cAsym, 1mm)
 - `atlas-HCPMMP` — HCP Multimodal Parcellation 1.0 surface atlas (fsLR 32k, extracted from Tian CIFTI)
+- `atlas-Brainnetome246Ext` — Brainnetome Atlas with 246 regions (MNI152NLin2009cAsym, 1mm) and surface projections (fsLR 32k)
+- `atlas-Schaefer` — Schaefer (100-1000)-region parcellation (MNI152NLin2009cAsym, 1mm) and surface projections (fsLR 32k)
+- all atlases included in QSIRecon (e.g, `atlas-4SX`, `atlas-AAL116`, `atlas-Gordon333Ext`, `atlas-AICHA384Ext`, etc.)
+
+The idea is to have a single source of truth for all atlases used in SNBB analyses, with a standardized format and metadata. The build pipeline generates both volumetric and surface versions (where applicable) of each atlas, along with TSV files containing label metadata - index, label (mandatory), hemisphere, etc. The source data is organized in `sourcedata/` and the build scripts are in `scripts/`. After building, the generated files are tracked by git-annex and can be committed with DataLad.
 
 ## Commands
 
